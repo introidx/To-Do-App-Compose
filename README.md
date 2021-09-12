@@ -1,6 +1,6 @@
 ## To-Do-App-Compose
 
-##         Give this repo a star ✨ if its helpful. 
+###         Give this repo a star ✨ if its helpful. 
 
 ## Under Development ⛏
 
