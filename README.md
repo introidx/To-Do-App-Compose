@@ -1,6 +1,8 @@
-# To-Do-App-Compose
+## To-Do-App-Compose
 
-# Under Development ⛏
+##         Give this repo a star ✨ if its helpful. 
+
+## Under Development ⛏
 
 ## DB Queries used: ⚡
 ```
@@ -52,3 +54,5 @@ interface ToDoDao {
 This app uses [***MVVM (Model View View-Model)***](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) architecture.
 
 ![](https://developer.android.com/topic/libraries/architecture/images/final-architecture.png)
+
+## 
