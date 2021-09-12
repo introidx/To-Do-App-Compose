@@ -6,12 +6,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.introid.todoappcompose.data.models.Priority
 import com.introid.todoappcompose.ui.theme.LARGE_PADDING
 import com.introid.todoappcompose.ui.theme.PRIORITY_INDICATION_SIZE
