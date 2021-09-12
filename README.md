@@ -1,8 +1,7 @@
-## To-Do-App-Compose
+## To-Do-App-Compose- Under Development ⛏
 
 Give this repo a star ✨ if its helpful. 
 
-## Under Development ⛏
 
 ## DB Queries used: ⚡
 ```
