@@ -27,15 +27,40 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.ImeOptions
 import com.introid.todoappcompose.components.PriorityItem
 import com.introid.todoappcompose.ui.theme.*
+import com.introid.todoappcompose.ui.viewmodels.SharedViewModel
+import com.introid.todoappcompose.util.SearchAppBarState
+import com.introid.todoappcompose.util.TrailingIconState
 
 @Composable
 fun ListAppBar(
+    sharedViewModel: SharedViewModel,
+    searchAppBarState: SearchAppBarState,
+    searchTextState: String
 ) {
-    DefaultListAppBar(
-        onSearchClicked = {},
-        onSortClicked = {},
-        onDeleteClicked = {}
-    )
+    when (searchAppBarState) {
+        SearchAppBarState.CLOSED -> {
+            DefaultListAppBar(
+                onSearchClicked = {
+                    sharedViewModel.searchAppBarState.value = SearchAppBarState.OPENED
+                },
+                onSortClicked = {},
+                onDeleteClicked = {}
+            )
+        }
+        else -> {
+            SearchAppBar(
+                text = searchTextState,
+                onTextChanged = { newText ->
+                    sharedViewModel.searchTextState.value = newText
+                },
+                onCloseClicked = {
+                    sharedViewModel.searchAppBarState.value = SearchAppBarState.CLOSED
+                    sharedViewModel.searchTextState.value = ""
+                },
+                onSearchClicked = {}
+            )
+        }
+    }
 }
 
 @Composable
@@ -184,6 +209,10 @@ fun SearchAppBar(
     onCloseClicked: () -> Unit,
     onSearchClicked: (String) -> Unit
 ) {
+    var trailingIconState by remember {
+        mutableStateOf(TrailingIconState.READY_TO_DELETE)
+    }
+
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -222,7 +251,21 @@ fun SearchAppBar(
             },
             trailingIcon = {
                 IconButton(onClick = {
-                    onCloseClicked()
+                    when (trailingIconState) {
+                        TrailingIconState.READY_TO_DELETE -> {
+                            onTextChanged("")
+                            trailingIconState = TrailingIconState.READY_TO_CLOSE
+                        }
+                        TrailingIconState.READY_TO_CLOSE -> {
+                            if (text.isNotEmpty()) {
+                                onTextChanged("")
+                            }else{
+                                onCloseClicked()
+                                trailingIconState = TrailingIconState.READY_TO_DELETE
+
+                            }
+                        }
+                    }
                 }) {
                     Icon(
                         imageVector = Icons.Filled.Close,
