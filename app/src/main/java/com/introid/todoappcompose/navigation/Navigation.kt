@@ -1,5 +1,6 @@
 package com.introid.todoappcompose.navigation
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
@@ -9,6 +10,7 @@ import com.introid.todoappcompose.navigation.destiations.taskComposable
 import com.introid.todoappcompose.ui.viewmodels.SharedViewModel
 import com.introid.todoappcompose.util.Constants.LIST_SCREEN
 
+@ExperimentalMaterialApi
 @Composable
 fun SetupNavigation(
     navController: NavHostController,

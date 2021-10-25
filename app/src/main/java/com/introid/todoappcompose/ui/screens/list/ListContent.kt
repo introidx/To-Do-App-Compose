@@ -2,6 +2,8 @@ package com.introid.todoappcompose.ui.screens.list
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -18,9 +20,26 @@ import com.introid.todoappcompose.data.models.ToDoTask
 import com.introid.todoappcompose.navigation.Screens
 import com.introid.todoappcompose.ui.theme.*
 
+@ExperimentalMaterialApi
 @Composable
-fun ListContent() {
+fun ListContent(
+    tasks: List<ToDoTask>,
+    navigateToTaskScreen: (taskId: Int) -> Unit
+) {
+    LazyColumn {
+        items(
+            items = tasks,
+            key = { task ->
+                task.id
+            }
+        ) { task ->
+            TaskItem(
+                toDoTask = task,
+                navigateToTaskScreen = navigateToTaskScreen
+            )
 
+        }
+    }
 
 }
 
@@ -48,7 +67,7 @@ fun TaskItem(
             Row {
                 Text(
                     text = toDoTask.title,
-                    modifier =Modifier.weight(8f),
+                    modifier = Modifier.weight(8f),
                     color = MaterialTheme.colors.taskItemTextColor,
                     style = MaterialTheme.typography.h5,
                     fontWeight = FontWeight.Bold,
@@ -60,12 +79,12 @@ fun TaskItem(
                         .weight(1f),
                     contentAlignment = Alignment.TopEnd
 
-                ){
+                ) {
                     Canvas(
                         modifier = Modifier
                             .width(PRIORITY_INDICATION_SIZE)
                             .height(PRIORITY_INDICATION_SIZE),
-                        ){
+                    ) {
                         drawCircle(
                             color = toDoTask.priority.color
                         )
@@ -89,8 +108,8 @@ fun TaskItem(
 @ExperimentalMaterialApi
 @Composable
 @Preview
-fun TaskItemPreview(){
+fun TaskItemPreview() {
     TaskItem(
-        toDoTask = ToDoTask(0, "Eat" , "description" , Priority.HIGH) ,
+        toDoTask = ToDoTask(0, "Eat", "description", Priority.HIGH),
         navigateToTaskScreen = {})
 }

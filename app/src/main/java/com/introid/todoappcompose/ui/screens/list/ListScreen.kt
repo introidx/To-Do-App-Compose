@@ -1,13 +1,13 @@
 package com.introid.todoappcompose.ui.screens.list
 
+import android.util.Log
+import androidx.compose.material.*
 import com.introid.todoappcompose.R
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -16,11 +16,21 @@ import com.introid.todoappcompose.ui.theme.fabBackGroundColor
 import com.introid.todoappcompose.ui.viewmodels.SharedViewModel
 import com.introid.todoappcompose.util.SearchAppBarState
 
+@ExperimentalMaterialApi
 @Composable
 fun ListScreen(
     navigateToTaskScreen: (taskId: Int) -> Unit,
     sharedViewModel: SharedViewModel
 ) {
+
+    LaunchedEffect(key1 = true ){
+        Log.d("ListScreen", "ListScreen: Launch effect triggered")
+        sharedViewModel.getAllTasks()
+    }
+    val allTasks by sharedViewModel.allTasks.collectAsState()
+    for (task in allTasks){
+        Log.d("ListScreen", "ListScreen: ${task.title} and ${task.description}")
+    }
     val searchAppBarState: SearchAppBarState
             by sharedViewModel.searchAppBarState
 
@@ -35,7 +45,8 @@ fun ListScreen(
             )
         },
         content = {
-              ListContent()
+              ListContent(tasks = allTasks
+                  , navigateToTaskScreen = navigateToTaskScreen)
         },
         floatingActionButton = {
             ListFab(onFabClicked = navigateToTaskScreen)
