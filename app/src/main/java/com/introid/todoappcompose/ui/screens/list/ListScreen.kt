@@ -1,6 +1,7 @@
 package com.introid.todoappcompose.ui.screens.list
 
 import android.util.Log
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.*
 import com.introid.todoappcompose.R
 import androidx.compose.material.icons.Icons
@@ -28,9 +29,6 @@ fun ListScreen(
         sharedViewModel.getAllTasks()
     }
     val allTasks by sharedViewModel.allTasks.collectAsState()
-    for (task in allTasks){
-        Log.d("ListScreen", "ListScreen: ${task.title} and ${task.description}")
-    }
     val searchAppBarState: SearchAppBarState
             by sharedViewModel.searchAppBarState
 

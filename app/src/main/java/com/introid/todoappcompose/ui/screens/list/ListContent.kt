@@ -19,18 +19,22 @@ import com.introid.todoappcompose.data.models.Priority
 import com.introid.todoappcompose.data.models.ToDoTask
 import com.introid.todoappcompose.navigation.Screens
 import com.introid.todoappcompose.ui.theme.*
+import com.introid.todoappcompose.util.RequestState
 
 @ExperimentalMaterialApi
 @Composable
 fun ListContent(
-    tasks: List<ToDoTask>,
+    tasks: RequestState<List<ToDoTask>>,
     navigateToTaskScreen: (taskId: Int) -> Unit
 ) {
-    if (tasks.isEmpty()) {
-        EmptyContent()
-    } else {
-        DisplayTasks(tasks = tasks, navigateToTaskScreen = navigateToTaskScreen)
+    if (tasks is RequestState.Success){
+        if (tasks.data.isEmpty()) {
+            EmptyContent()
+        } else {
+            DisplayTasks(tasks = tasks.data, navigateToTaskScreen = navigateToTaskScreen)
+        }
     }
+
 }
 
 @ExperimentalMaterialApi
