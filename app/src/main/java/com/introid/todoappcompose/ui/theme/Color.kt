@@ -13,9 +13,9 @@ val LightGray = Color(0xFFFCFCFC)
 val MediumGray = Color(0xFF9C9C9C)
 val DarkGray = Color(0xFF141414)
 
-val lowPriorityColor = Color(0xFF00c980)
+val lowPriorityColor = Color(0xFF00C980)
 val mediumPriorityColor = Color(0xFFFFC114)
-val highPriorityColor = Color(0xFFFF4648)
+val highPriorityColor = Color(0XFFFF4646)
 val nonePriorityColor = Color(0xFFFFFFFF)
 
 val Colors.taskItemTextColor: Color
